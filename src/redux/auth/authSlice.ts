@@ -30,6 +30,10 @@ const authSlice = createSlice({
     logout: (state) => {
       state.user = null;
     },
+    // registerSuccess: (state, action) => {
+    //   state.loading = false;
+    //   state.user = action.payload;
+    // },
   },
   extraReducers: (builder) => {
     builder

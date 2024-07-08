@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import {
     View,
     Image,
@@ -8,6 +8,7 @@ import {
     ActivityIndicator,
     KeyboardAvoidingView,
     Platform,
+    Text,
 } from 'react-native';
 import { useForm } from 'react-hook-form';
 import CustomInput from '../components/CustomInput';
@@ -39,7 +40,11 @@ export default function Register({ navigation }: RegisterScreenProps) {
 
     const onRegisterPressed = async (data: RegisterData) => {
         // Redux register
-        await dispatch(registerUser(data));
+        await dispatch(registerUser(data)).then(()=>{
+            // navigation.navigate("Page")
+            // console.log("success")
+        })
+        // Alert.alert(error)
         if (user) {
             // Redirect the user to the dashboard or any other route
             console.log("scuess")
@@ -47,6 +52,12 @@ export default function Register({ navigation }: RegisterScreenProps) {
         // Context register
         // await registerWithContext(data.email, data.password)
     };
+
+    useEffect(() => {
+        if (error) {
+          Alert.alert('Registration Error', error);
+        }
+      }, [error]);
 
     const onForgotPasswordPressed = () => {
         console.log('onForgotPasswordPressed');
@@ -97,19 +108,20 @@ export default function Register({ navigation }: RegisterScreenProps) {
                             },
                         }}
                     />
-                    {/* {loading ? (
+                    {loading ? (
                         <ActivityIndicator size="large" color="#F41111" />
                     ) : (
                         <CustomButton
                             text={'Register'}
                             onPress={handleSubmit(onRegisterPressed)}
                         />
-                    )} */}
+                    )}
+                    {error && <Text style={styles.errorText}>{error}</Text>}
 
-                    <CustomButton
+                    {/* <CustomButton
                         text={'Register'}
                         onPress={handleSubmit(onRegisterPressed)}
-                    />
+                    /> */}
 
                     <CustomButton
                         text={"Forgot password?"}
@@ -148,4 +160,8 @@ const styles = StyleSheet.create({
         // maxWidth: 300,
         // maxHeight: 200,
     },
+    errorText: {
+        color: 'red',
+        marginTop: 12,
+      },
 })

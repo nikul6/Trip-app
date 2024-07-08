@@ -45,6 +45,9 @@ export default function Home({ navigation }: HomeScreenProps) {
       <Pressable onPress={() => navigation.navigate('PageRedux')}>
         <Text>PageRedux</Text>
       </Pressable>
+      <Pressable onPress={() => navigation.navigate('Chat')}>
+        <Text>Chat</Text>
+      </Pressable>
     </View>
   )
 }

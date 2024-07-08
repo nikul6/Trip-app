@@ -11,6 +11,7 @@ import Register from '../screens/Register';
 import Home from '../screens/Home';
 import Page from '../screens/Page';
 import PageRedux from '../screens/PageRedux';
+import Chat from '../screens/Chat';
 import { useSelector } from 'react-redux';
 import { RootState } from '../redux/store';
 // import { useAuth } from '../Context/AuthProvider';
@@ -29,6 +30,7 @@ function ScreenNavigation() {
                     <Stack.Screen name="Home" component={Home} options={{ headerShown: true }} />
                     <Stack.Screen name="Page" component={Page} options={{ headerShown: false }} />
                     <Stack.Screen name="PageRedux" component={PageRedux} options={{ headerShown: false }} />
+                    <Stack.Screen name="Chat" component={Chat} options={{ headerShown: false }} />
                 </>
             ) : (
                 <>

@@ -4,6 +4,7 @@ type RootStackParamList = {
     Home: undefined;
     Page: undefined;
     PageRedux: undefined;
+    Chat: undefined;
     TheatreMap: undefined;
     TheatreDetails: { theatres: Theatre }
     MoviesScreen: undefined;

@@ -2,6 +2,8 @@ type RootStackParamList = {
     Login: undefined;
     Register: undefined;
     Home: undefined;
+    Page: undefined;
+    PageRedux: undefined;
     TheatreMap: undefined;
     TheatreDetails: { theatres: Theatre }
     MoviesScreen: undefined;
@@ -16,3 +18,9 @@ interface SimpleUser {
   uid: string;
   email: string;
 }
+
+interface Character  {
+  id: number;
+  name: string;
+  image: string;
+};

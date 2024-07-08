@@ -9,31 +9,39 @@ import {
 import Login from '../screens/Login';
 import Register from '../screens/Register';
 import Home from '../screens/Home';
-// import TheatreMap from '../screens/TheatreMap';
-// import TheatreDetails from '../screens/TheatreDetails';
-// import MoviesScreen from '../screens/MoviesScreen';
-// import { AuthContext } from '../Context/AuthContext';
+import Page from '../screens/Page';
+import PageRedux from '../screens/PageRedux';
+import { useSelector } from 'react-redux';
+import { RootState } from '../redux/store';
+// import { useAuth } from '../Context/AuthProvider';
 
 const Stack = createNativeStackNavigator<RootStackParamList>();
 
 function ScreenNavigation() {
 
-    // const { isAuthenticated } = useContext(AuthContext);
+    const user = useSelector((state: RootState) => state.auth.user);
+    // const { isAuthenticated } = useAuth();
 
     return (
         <Stack.Navigator screenOptions={{ headerShown: false }} initialRouteName='Login'>
-            {/* {!isAuthenticated ? (
-                <Stack.Screen name="Login" component={Login} options={{ headerShown: false }} />
+            {user ? (
+                <>
+                    <Stack.Screen name="Home" component={Home} options={{ headerShown: true }} />
+                    <Stack.Screen name="Page" component={Page} options={{ headerShown: false }} />
+                    <Stack.Screen name="PageRedux" component={PageRedux} options={{ headerShown: false }} />
+                </>
             ) : (
                 <>
-                    <Stack.Screen name="TheatreMap" component={TheatreMap} />
-                    <Stack.Screen name="TheatreDetails" component={TheatreDetails} />
-                    <Stack.Screen name="MoviesScreen" component={MoviesScreen} />
+                    <Stack.Screen name="Login" component={Login} options={{ headerShown: false }} />
+                    <Stack.Screen name="Register" component={Register} options={{ headerShown: false }} />
                 </>
-            )} */}
-            <Stack.Screen name="Login" component={Login} options={{ headerShown: false }} />
-            <Stack.Screen name="Register" component={Register} options={{ headerShown: false }} />
-            <Stack.Screen name="Home" component={Home} options={{ headerShown: false }} />
+            )}
+
+            {/* {isAuthenticated ?
+                <Stack.Screen name="Home" component={Home} options={{ headerShown: true }} /> :
+                <Stack.Screen name="Login" component={Login} options={{ headerShown: false }} />
+            } */}
+
         </Stack.Navigator>
     );
 }

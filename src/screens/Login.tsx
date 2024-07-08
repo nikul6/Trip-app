@@ -20,19 +20,17 @@ import {
 import { useDispatch, useSelector } from 'react-redux';
 import { AppDispatch, RootState } from '../redux/store';
 import { loginUser } from '../redux/auth/authAction';
-// import { RootState } from '../redux/store';
-// import { AuthContext } from '../Context/AuthContext';
+import { useAuth } from '../Context/AuthProvider';
 // import AsyncStorage from '@react-native-async-storage/async-storage';
 
 type LoginScreenProps = NativeStackScreenProps<RootStackParamList, "Login">
 
 export default function Login({ navigation }: LoginScreenProps) {
-    // const [loading, setLoading] = useState<boolean>(false);
     const insets = useSafeAreaInsets();
-    //   const { setIsAuthenticated } = useContext(AuthContext);
 
-     const dispatch = useDispatch<AppDispatch>();
-  const { user, loading, error } = useSelector((state: RootState) => state.auth);
+    const { loginWithContext } = useAuth();
+    const dispatch = useDispatch<AppDispatch>();
+    const { user, loading, error } = useSelector((state: RootState) => state.auth);
 
     const {
         control,
@@ -41,10 +39,10 @@ export default function Login({ navigation }: LoginScreenProps) {
     } = useForm<RegisterData>();
 
     const onSignInPressed = async (data: RegisterData) => {
+        //Redux login
         await dispatch(loginUser(data));
-        if (user?.email) {
-            console.log("scuess")
-          }
+        //Context login
+        // await loginWithContext(data.email, data.password)
     };
 
     const onForgotPasswordPressed = () => {
@@ -104,6 +102,10 @@ export default function Login({ navigation }: LoginScreenProps) {
                             onPress={handleSubmit(onSignInPressed)}
                         />
                     )}
+                    {/* <CustomButton
+                            text={'Sign In'}
+                            onPress={handleSubmit(onSignInPressed)}
+                        /> */}
 
                     <CustomButton
                         text={"Register"}

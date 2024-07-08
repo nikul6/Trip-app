@@ -17,20 +17,19 @@ import { NativeStackScreenProps } from "@react-navigation/native-stack";
 import {
     useSafeAreaInsets,
 } from 'react-native-safe-area-context';
+import { useAuth } from '../Context/AuthProvider';
 import { useDispatch, useSelector } from 'react-redux';
 import { registerUser } from '../redux/auth/authAction';
 import { AppDispatch, RootState } from '../redux/store';
-// import { AuthContext } from '../Context/AuthContext';
-// import AsyncStorage from '@react-native-async-storage/async-storage';
 
 type RegisterScreenProps = NativeStackScreenProps<RootStackParamList, "Register">
 
 export default function Register({ navigation }: RegisterScreenProps) {
     const insets = useSafeAreaInsets();
-    //   const { setIsAuthenticated } = useContext(AuthContext);
 
     const dispatch = useDispatch<AppDispatch>();
-  const { user, loading, error } = useSelector((state: RootState) => state.auth);
+    const { user, loading, error } = useSelector((state: RootState) => state.auth);
+    // const {registerWithContext} = useAuth();
 
     const {
         control,
@@ -39,12 +38,14 @@ export default function Register({ navigation }: RegisterScreenProps) {
     } = useForm<RegisterData>();
 
     const onRegisterPressed = async (data: RegisterData) => {
+        // Redux register
         await dispatch(registerUser(data));
-        console.log("u ", user)
         if (user) {
             // Redirect the user to the dashboard or any other route
             console.log("scuess")
-          }
+        }
+        // Context register
+        // await registerWithContext(data.email, data.password)
     };
 
     const onForgotPasswordPressed = () => {
@@ -96,14 +97,19 @@ export default function Register({ navigation }: RegisterScreenProps) {
                             },
                         }}
                     />
-                    {loading ? (
+                    {/* {loading ? (
                         <ActivityIndicator size="large" color="#F41111" />
                     ) : (
                         <CustomButton
                             text={'Register'}
                             onPress={handleSubmit(onRegisterPressed)}
                         />
-                    )}
+                    )} */}
+
+                    <CustomButton
+                        text={'Register'}
+                        onPress={handleSubmit(onRegisterPressed)}
+                    />
 
                     <CustomButton
                         text={"Forgot password?"}

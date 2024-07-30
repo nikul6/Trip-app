@@ -10,13 +10,14 @@ export const registerUser = createAsyncThunk<
   { rejectValue: string }
 >(
   'auth/registerUser',
-  async ({ email, password }, { rejectWithValue }) => {
+  async ({ email, password, name }, { rejectWithValue }) => {
     try {
       const userCredential = await createUserWithEmailAndPassword(auth, email, password);
       const user = userCredential.user;
       await setDoc(doc(db, "users", user.uid), {
         email,
-        userId: user.uid
+        userId: user.uid,
+        name: name
       });
       // console.log("user ---> ", user)
       return { uid: user.uid, email: user.email!, success: true };

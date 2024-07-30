@@ -77,15 +77,15 @@
 
 // export default CharacterList;
 
-// import { StyleSheet, Text, View } from 'react-native'
-// import React from 'react'
+import { StyleSheet, Text, View } from 'react-native'
+import React from 'react'
 
-// export default function PageRedux() {
-//   return (
-//     <View>
-//       <Text>PageRedux</Text>
-//     </View>
-//   )
-// }
+export default function PageRedux() {
+  return (
+    <View>
+      <Text>PageRedux</Text>
+    </View>
+  )
+}
 
-// const styles = StyleSheet.create({})
+const styles = StyleSheet.create({})

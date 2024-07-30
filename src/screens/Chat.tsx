@@ -42,6 +42,9 @@ export default function Chat() {
                     <Text>{item.email}</Text>
                 </View>}
             />
+            {/* {allUser.map((data)=>(
+                <Text>{data.email}</Text>
+            ))} */}
         </View>
     )
 }

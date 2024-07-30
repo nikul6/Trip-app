@@ -84,6 +84,14 @@ export default function Register({ navigation }: RegisterScreenProps) {
                         resizeMode="contain"
                     />
                     <CustomInput
+                        name="name"
+                        placeholder="Name"
+                        control={control}
+                        rules={{
+                            required: 'name is required',
+                        }}
+                    />
+                    <CustomInput
                         name="email"
                         placeholder="email"
                         control={control}

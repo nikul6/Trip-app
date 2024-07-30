@@ -48,6 +48,9 @@ export default function Home({ navigation }: HomeScreenProps) {
       <Pressable onPress={() => navigation.navigate('Chat')}>
         <Text>Chat</Text>
       </Pressable>
+      <Pressable onPress={() => navigation.navigate('AddTrip')}>
+        <Text>Add Trip</Text>
+      </Pressable>
     </View>
   )
 }

@@ -1,17 +1,21 @@
-import { FlatList, StyleSheet, Text, View } from 'react-native'
+import { FlatList, StyleSheet, Text, TouchableOpacity, View } from 'react-native'
 import React, { useEffect, useState } from 'react'
 import ChatList from '../components/ChatList'
 import { useSelector } from 'react-redux';
 import { RootState } from '../redux/store';
 import { getDocs, query, where } from 'firebase/firestore';
 import { db, userRef } from '../firebase';
+import { NativeStackScreenProps } from "@react-navigation/native-stack";
 
 interface UserData {
     email: string;
-    userId: string
+    userId: string;
+    name: string
 }
 
-export default function Chat() {
+type ChatScreenProps = NativeStackScreenProps<RootStackParamList, "Chat">
+
+export default function Chat({navigation}:ChatScreenProps) {
 
     const [allUser, setAllUser] = useState<UserData[]>([]);
     const user = useSelector((state: RootState) => state.auth.user);
@@ -24,6 +28,7 @@ export default function Chat() {
             const querySnapshot = await getDocs(query1);
             let data: UserData[] = [];
             querySnapshot.forEach(doc => {
+                console.log("doc  --> ", doc.data())
                 data.push({ ...doc.data() } as UserData);
             })
             setAllUser(data)
@@ -38,9 +43,11 @@ export default function Chat() {
             {/* <ChatList/> */}
             <FlatList
                 data={allUser}
-                renderItem={({ item }) => <View>
-                    <Text>{item.email}</Text>
-                </View>}
+                renderItem={({ item }) => (
+                    <TouchableOpacity style={{ flex: 1, margin: 10, borderWidth: 1 }} onPress={()=> navigation.navigate('ChatRoom', {id: item.userId, name: item.name})}>
+                        <Text>{item.name}</Text>
+                    </TouchableOpacity>
+                )}
             />
             {/* {allUser.map((data)=>(
                 <Text>{data.email}</Text>

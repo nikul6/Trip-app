@@ -14,6 +14,7 @@ import PageRedux from '../screens/PageRedux';
 import Chat from '../screens/Chat';
 import AddTrip from '../screens/AddTrip';
 import GetTrip from '../screens/GetTrip';
+import ChatRoom from '../screens/ChatRoom';
 import { useSelector } from 'react-redux';
 import { RootState } from '../redux/store';
 // import { useAuth } from '../Context/AuthProvider';
@@ -35,6 +36,7 @@ function ScreenNavigation() {
                     <Stack.Screen name="Chat" component={Chat} options={{ headerShown: false }} />
                     <Stack.Screen name="AddTrip" component={AddTrip} options={{ headerShown: true }} />
                     <Stack.Screen name="GetTrip" component={GetTrip} options={{ headerShown: true }} />
+                    <Stack.Screen name="ChatRoom" component={ChatRoom} options={{ headerShown: true }} />
                 </>
             ) : (
                 <>

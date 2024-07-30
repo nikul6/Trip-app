@@ -7,6 +7,7 @@ type RootStackParamList = {
     Chat: undefined;
     AddTrip: undefined;
     GetTrip: undefined;
+    ChatRoom: {id: string, name: string};
     TheatreMap: undefined;
     TheatreDetails: { theatres: Theatre }
     MoviesScreen: undefined;
@@ -21,6 +22,7 @@ interface RegisterData {
 interface SimpleUser {
   uid: string;
   email: string;
+  name?: string;
 }
 
 interface Character  {
